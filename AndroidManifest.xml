@@ -14,7 +14,7 @@
     <application
         android:name="com.android.apps.basictwitter.TwitterApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ic_twitter_bird"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <meta-data
@@ -45,7 +45,7 @@
         </activity>
         <activity
             android:name="com.android.apps.basictwitter.TimelineActivity"
-            android:label="@string/title_activity_timeline" >
+           >
         </activity>
     </application>
 

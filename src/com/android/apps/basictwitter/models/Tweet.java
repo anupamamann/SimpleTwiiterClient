@@ -11,13 +11,21 @@ import org.json.JSONObject;
 
 import android.text.format.DateUtils;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
 
-public class Tweet {
+@Table(name = "Tweet")
+public class Tweet extends Model{
 
+	@Column(name = "body")
 	private String body;
+	@Column(name = "uid",  unique = true)
 	private long uid;
+	@Column(name = "createdAt")
 	private String createdAt;
+
 	private User user; 
 	
 	

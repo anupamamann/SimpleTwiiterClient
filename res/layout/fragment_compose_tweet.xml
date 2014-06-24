@@ -9,6 +9,7 @@
      android:layout_margin="4dip"
     android:padding="10dp"
     android:background="@android:color/white"
+    
     tools:context="${packageName}.${activityClass}" >
          
          <EditText 
@@ -22,6 +23,7 @@
         android:minLines="5"
         android:singleLine="false" 
         android:gravity="top|left"
+        android:textSize="14dp"
         android:layout_marginLeft="10dp"
           android:layout_marginRight="10dp"
         android:scrollHorizontally="false"
@@ -34,13 +36,17 @@
               android:layout_marginLeft="200dp"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="@string/tweet"  />
+             android:background="@drawable/ic_button_twitter"
+              />
 
              <TextView
                  android:id="@+id/tvCounter"
+                 
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:layout_weight="0.05"
-                 android:text="TextView" />
+                 android:layout_weight="0.03"
+                 android:textSize="9sp"
+                 android:textColor="@android:color/holo_blue_dark"
+                 android:text="" />
     
     </LinearLayout>

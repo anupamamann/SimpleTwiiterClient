@@ -6,44 +6,59 @@
     <ImageView
         android:id="@+id/ivProfileImage"
         android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher" 
+        android:layout_marginBottom="2dp"
+        android:layout_marginRight="2dp"/>
 
     <TextView
         android:id="@+id/tvName"
+         android:layout_marginLeft="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/ivProfileImage"
+        android:textSize="10sp"
+       
         android:text="Name" />
+
     <TextView
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+         android:layout_marginLeft="1dp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/tvName"
+         android:textSize="10sp"
         android:text="\@Foo" />
 
     <TextView
         android:id="@+id/tvBody"
-        
+        android:padding="5dp"
+         android:layout_marginBottom="2dp"
+         android:layout_marginLeft="5dp"
+         android:paddingBottom="5dp"
+        android:layout_marginRight="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/ivProfileImage"
         android:layout_below="@+id/tvUsername"
+        android:layout_toRightOf="@+id/ivProfileImage"
+        android:autoLink="all"
         android:textAppearance="?android:attr/textAppearanceSmall"
-         android:autoLink="all"
-        android:text="Tweet Body" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/tvTimeStamp"
+         
+        android:layout_marginRight="1dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:text="date"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="date" />
+        android:textSize="9sp" />
 
 </RelativeLayout>

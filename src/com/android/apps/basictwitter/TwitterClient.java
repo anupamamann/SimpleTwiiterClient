@@ -43,8 +43,8 @@ public class TwitterClient extends OAuthBaseClient {
     	RequestParams params = new RequestParams();
     	//params.put("since_id", "1");
     	for(Map.Entry<String, String> entry : map.entrySet()){
-    		Log.d("map key:",entry.getKey() );
-    		Log.d("map value:",entry.getValue() );
+    		//Log.d("map key:",entry.getKey() );
+    		//Log.d("map value:",entry.getValue() );
     		params.put(entry.getKey(), entry.getValue());
     	}
     	client.get(apiUrl,params,handler);

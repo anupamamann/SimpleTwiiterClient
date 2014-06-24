@@ -7,6 +7,9 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.app.ActionBar;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -36,8 +39,12 @@ public class TimelineActivity extends FragmentActivity implements ComposeDialogL
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_timeline);
-		client = TwitterApplication.getRestClient();
-		lvTweets = (PullToRefreshListView)findViewById(R.id.lvTweets);
+		
+		 ActionBar ab = getActionBar(); 
+         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#ffffff"));     
+         ab.setBackgroundDrawable(colorDrawable);
+         client = TwitterApplication.getRestClient();
+        lvTweets = (PullToRefreshListView)findViewById(R.id.lvTweets);
 		tweets = new ArrayList<Tweet>();
 		aTweets = new TwitterArrayAdapter(this,  tweets);
 		lvTweets.setAdapter(aTweets);
