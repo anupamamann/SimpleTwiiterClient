@@ -9,5 +9,6 @@
     <string name="title_activity_timeline">TimelineActivity</string>
     <string name="twitter_tweet">Compose new Tweet</string>
     <string name="tweet">Tweet</string>
+    <string name="title_activity_detail">DetailActivity</string>
 
 </resources>

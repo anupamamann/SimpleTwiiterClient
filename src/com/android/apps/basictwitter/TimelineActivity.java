@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,11 +17,15 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.android.apps.basictwitter.ComposeTweetDialog.ComposeDialogListener;
 import com.android.apps.basictwitter.models.Tweet;
+
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import eu.erikw.PullToRefreshListView;
@@ -44,10 +49,12 @@ public class TimelineActivity extends FragmentActivity implements ComposeDialogL
          ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#ffffff"));     
          ab.setBackgroundDrawable(colorDrawable);
          client = TwitterApplication.getRestClient();
-        lvTweets = (PullToRefreshListView)findViewById(R.id.lvTweets);
+      
 		tweets = new ArrayList<Tweet>();
 		aTweets = new TwitterArrayAdapter(this,  tweets);
+		  lvTweets = (PullToRefreshListView)findViewById(R.id.lvTweets);
 		lvTweets.setAdapter(aTweets);
+		
 		Map<String, String>map = new HashMap<String, String>();
 		map.put("since_id","1");
 		populateTimeLine(map);
@@ -72,6 +79,23 @@ public class TimelineActivity extends FragmentActivity implements ComposeDialogL
 			}
 		});
 		
+		lvTweets.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Tweet tweet = aTweets.getItem(position);
+				Intent intent = new Intent(TimelineActivity.this, DetailActivity.class);
+				
+				intent.putExtra("username", tweet.getUser().getScreenName());
+				intent.putExtra("name", tweet.getUser().getName());
+				intent.putExtra("image", tweet.getUser().getProfileImageUrl());
+				intent.putExtra("body", tweet.getBody());
+				startActivity(intent);
+			}
+			
+		});
+		
 		lvTweets.setOnRefreshListener(new OnRefreshListener() {
 			
 			@Override
@@ -82,6 +106,8 @@ public class TimelineActivity extends FragmentActivity implements ComposeDialogL
 				
 			}
 		});
+		
+		
 	}
 	
 	@Override

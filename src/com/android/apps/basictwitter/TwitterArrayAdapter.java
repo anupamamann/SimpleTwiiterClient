@@ -5,8 +5,10 @@ import java.util.List;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +16,7 @@ import com.android.apps.basictwitter.models.Tweet;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class TwitterArrayAdapter extends ArrayAdapter<Tweet>{
-
+	Tweet tweet;
 	public TwitterArrayAdapter(Context context, List<Tweet> tweets){
 		super(context, 0, tweets);
 	}
@@ -22,7 +24,7 @@ public class TwitterArrayAdapter extends ArrayAdapter<Tweet>{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
-		Tweet tweet = getItem(position);
+		 tweet = getItem(position);
 		View v;
 		if (convertView == null) {
 	          v = LayoutInflater.from(getContext()).inflate(R.layout.tweet_item, parent, false);
@@ -35,6 +37,7 @@ public class TwitterArrayAdapter extends ArrayAdapter<Tweet>{
 	       TextView tvName = (TextView) v.findViewById(R.id.tvName);
 	       TextView tvUsername = (TextView) v.findViewById(R.id.tvUsername);
 	       TextView tvTimeStamp = (TextView) v.findViewById(R.id.tvTimeStamp);
+	      // Button btnReply = (Button)v.findViewById(R.id.btnReply);
 	       ivProfileImage.setImageResource(android.R.color.transparent);
 	       ImageLoader imageLoader = ImageLoader.getInstance();
 	       imageLoader.displayImage(tweet.getUser().getProfileImageUrl(), ivProfileImage);
@@ -44,7 +47,8 @@ public class TwitterArrayAdapter extends ArrayAdapter<Tweet>{
 	       tvTimeStamp.setText(tweet.getRelativeTimeAgo(tweet.getCreatedAt()));
 	       tvName.setText(tweet.getUser().getName());
 	       tvUsername.setText(" @" + tweet.getUser().getScreenName());
-	        
+	     
+	     
 	       return v;
 	}
 }

@@ -25,9 +25,12 @@ public class Tweet extends Model{
 	private long uid;
 	@Column(name = "createdAt")
 	private String createdAt;
-
+	@Column(name = "User")
 	private User user; 
 	
+	public Tweet(){
+		super();
+	}
 	
 
 	public String getBody() {
