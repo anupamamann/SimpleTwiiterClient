@@ -23,3 +23,8 @@ SimpleTwiiterClient
 Demo -
 
 ![alt tag](simpleTwitter.gif)
+
+
+Hyperlink Demo -
+
+![alt tag](simpleTwitterHyperlink.gif)
