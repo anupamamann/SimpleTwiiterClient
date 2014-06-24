@@ -19,7 +19,7 @@ public class Tweet {
 	private long uid;
 	private String createdAt;
 	private User user; 
-	public static long MAX_ID;
+	
 	
 
 	public String getBody() {
@@ -91,11 +91,6 @@ public class Tweet {
 		
 	}
 	
-	public static long getMaxID(){
-		
-		return MAX_ID;
-		
-	}
 	
 	@Override
 	public String toString() {

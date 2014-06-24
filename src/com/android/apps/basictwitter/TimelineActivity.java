@@ -28,7 +28,9 @@ public class TimelineActivity extends FragmentActivity implements ComposeDialogL
 	ArrayList<Tweet> tweets;
 	ArrayAdapter<Tweet> aTweets;
 	private PullToRefreshListView lvTweets;
-	Map<String, Integer>params; 
+	Map<String, String>params;
+	final int tweet_count=20;
+	public static long MAX_ID;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,22 +41,27 @@ public class TimelineActivity extends FragmentActivity implements ComposeDialogL
 		tweets = new ArrayList<Tweet>();
 		aTweets = new TwitterArrayAdapter(this,  tweets);
 		lvTweets.setAdapter(aTweets);
-		params = new HashMap<String, Integer>();
-		params.put("since_id", 1);
-		
-		populateTimeLine();
-		
-		//int since_id;
-		//int max_id;
+		Map<String, String>map = new HashMap<String, String>();
+		map.put("since_id","1");
+		populateTimeLine(map);
 		
 		lvTweets.setOnScrollListener(new EndlessScrollListener() {
 			
 			@Override
 			public void onLoadMore(int page, int totalItemsCount) {
+				Map<String, String>map = new HashMap<String, String>();
 				
-				Toast.makeText(TimelineActivity.this, tweets.size() + "", Toast.LENGTH_LONG).show();
-				populateTimeLine();
+				if(page>2){
+					//Toast.makeText(TimelineActivity.this, tweets.get(tweets.size() -1).getUid()+"", Toast.LENGTH_LONG).show();
+					map.put("max_id",tweets.get(tweets.size() -1).getUid()+"");
+					populateTimeLine(map);
 				
+			}
+				//else{
+				//Toast.makeText(TimelineActivity.this, page+"", Toast.LENGTH_LONG).show();
+				//map.put("since_id","1");
+				//populateTimeLine(map);
+			//}
 			}
 		});
 		
@@ -62,7 +69,10 @@ public class TimelineActivity extends FragmentActivity implements ComposeDialogL
 			
 			@Override
 			public void onRefresh() {
-				populateTimeLine();
+				Map<String, String>map = new HashMap<String, String>();
+				map.put("since_id","1");
+				populateTimeLine(map);
+				
 			}
 		});
 	}
@@ -81,9 +91,9 @@ public class TimelineActivity extends FragmentActivity implements ComposeDialogL
 	
 	
 	
-	public void populateTimeLine(){
-		aTweets.clear();
-		client.getHomeTimeline(new JsonHttpResponseHandler(){
+	public void populateTimeLine(Map<String, String>map){
+		//aTweets.clear();
+		client.getHomeTimeline(map,new JsonHttpResponseHandler(){
 			
 			@Override
 			public void onSuccess(JSONArray json) {
@@ -116,7 +126,7 @@ public class TimelineActivity extends FragmentActivity implements ComposeDialogL
 						aTweets.insert(newTweet, 0);
 					}
 					
-					populateTimeLine();
+					//populateTimeLine();
 								
 				}
 			

@@ -1,10 +1,16 @@
 package com.android.apps.basictwitter;
 
+import java.util.Iterator;
+import java.util.Map;
+
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
 import android.content.Context;
+import android.os.DropBoxManager.Entry;
+import android.widget.Toast;
 
+import com.activeandroid.util.Log;
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -32,10 +38,15 @@ public class TwitterClient extends OAuthBaseClient {
         super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
     }
     
-    public void getHomeTimeline(AsyncHttpResponseHandler handler){
+    public void getHomeTimeline(Map<String, String>map, AsyncHttpResponseHandler handler){
     	String apiUrl = getApiUrl("statuses/home_timeline.json");
     	RequestParams params = new RequestParams();
-    	params.put("since_id", "1");
+    	//params.put("since_id", "1");
+    	for(Map.Entry<String, String> entry : map.entrySet()){
+    		Log.d("map key:",entry.getKey() );
+    		Log.d("map value:",entry.getValue() );
+    		params.put(entry.getKey(), entry.getValue());
+    	}
     	client.get(apiUrl,params,handler);
     	
     }
