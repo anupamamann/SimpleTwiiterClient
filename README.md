@@ -19,7 +19,7 @@ SimpleTwiiterClient
 
 Demo -
 
-![alt tag](intermeidateTwitter.gif)
+![alt tag](intermediateTwitter.gif)
 
 
 #App Features- 
