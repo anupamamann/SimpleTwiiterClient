@@ -1,8 +1,10 @@
 package com.android.apps.basictwitter.models;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.json.JSONArray;
@@ -13,26 +15,36 @@ import android.text.format.DateUtils;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Column.ForeignKeyAction;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
 
 @Table(name = "Tweet")
-public class Tweet extends Model{
+public class Tweet extends Model implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7824043443598174160L;
 	@Column(name = "body")
 	private String body;
-	@Column(name = "uid",  unique = true)
-	private long uid;
-	@Column(name = "createdAt")
+	@Column(name = "t_id",  unique = true)
+	private long tId;
+	@Column(name = "created_at")
 	private String createdAt;
-	@Column(name = "User")
+	@Column(name = "User", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
 	private User user; 
+	@Column(name = "tweet_type")
+	private tweetType tweetType;
 	
 	public Tweet(){
 		super();
 	}
 	
-
+	public enum tweetType{ HOME, MENTION, USER};
+	
+	
 	public String getBody() {
 		return body;
 	}
@@ -42,11 +54,11 @@ public class Tweet extends Model{
 	}
 
 	public long getUid() {
-		return uid;
+		return tId;
 	}
 
-	public void setUid(long uid) {
-		this.uid = uid;
+	public void setUid(long tId) {
+		this.tId = tId;
 	}
 
 	public String getCreatedAt() {
@@ -65,11 +77,11 @@ public class Tweet extends Model{
 		this.user = user;
 	}
 
-	public static ArrayList<Tweet> fromJsonArray(JSONArray jsonArray) {
+	public static ArrayList<Tweet> fromJsonArray(JSONArray jsonArray, tweetType type) {
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>(jsonArray.length());
 		for(int i = 0; i<jsonArray.length(); i++ ){
 			try{
-				Tweet tweet = Tweet.fromJson(jsonArray.getJSONObject(i));
+				Tweet tweet = Tweet.fromJson(jsonArray.getJSONObject(i), type);
 				if(tweet!=null)
 					tweets.add(tweet);
 				
@@ -83,15 +95,16 @@ public class Tweet extends Model{
 		return tweets;
 	}
 	
-	public static Tweet fromJson(JSONObject jsonObject){
+	public static Tweet fromJson(JSONObject jsonObject, tweetType type){
 		Tweet tweet = new Tweet();
 		//get tweets from json 
 		try{
 			tweet.body = jsonObject.getString("text");
-			tweet.uid = jsonObject.getLong("id");
+			tweet.tId = jsonObject.getLong("id");
 			tweet.createdAt = jsonObject.getString("created_at");
 			tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
-			
+			tweet.tweetType = type;
+			tweet.save();
 			
 		}catch(JSONException e){
 			e.printStackTrace();
@@ -125,5 +138,15 @@ public class Tweet extends Model{
 	 
 		return relativeDate;
 	}
+	
+	
+	 public static List<Tweet> getAll(tweetType Type) {
+	        // This is how you execute a query
+	        return new Select()
+	          .from(Tweet.class)
+	          .where("tweet_type = ?", Type)
+	          .orderBy("created_at DESC")
+	          .execute();
+	    }
 	
 }

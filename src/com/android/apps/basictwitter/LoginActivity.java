@@ -1,6 +1,9 @@
 package com.android.apps.basictwitter;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -12,6 +15,10 @@ public class LoginActivity extends OAuthLoginActivity<TwitterClient> {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		 ActionBar ab = getActionBar(); 
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#ffffff"));     
+        ab.setBackgroundDrawable(colorDrawable);
 		setContentView(R.layout.activity_login);
 	}
 

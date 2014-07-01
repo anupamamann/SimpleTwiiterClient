@@ -5,8 +5,16 @@
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     -->
+    
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
-         <item name="android:background">#ffffff</item>
+         
+      
+       
+        <!-- API 14 theme customizations can go here. -->
+    </style>
+    
+    <style name="MyActionBar" parent="android:Theme.Holo.Light">
+         <item name="android:background">#2ECCFA</item>
        
         <!-- API 14 theme customizations can go here. -->
     </style>
