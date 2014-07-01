@@ -1,7 +1,26 @@
 SimpleTwiiterClient
 ===================
 
+
+
 ##Simple Twitter Client for Android
+
+#Enhancements-
+1. User can switch between Timeline and Mention views using tabs.
+ 1. User can view their home timeline tweets.
+ 2. User can view the recent mentions of their username.
+ 3. User can scroll to bottom of either of these lists and new tweets will load ("infinite scroll")
+2. User can navigate to view their own profile
+ 1. User can see picture, tagline, # of followers, # of following, and tweets on their profile.
+3. User can click on the profile image in any tweet to see another user's profile.
+ 1. User can see picture, tagline, # of followers, # of following, and tweets of clicked user.
+ 2. Profile view should include that user's timeline
+4. User can click on a tweet to be taken to a "detail view" of that tweet
+
+Demo -
+
+![alt tag](intermeidateTwitter.gif)
+
 
 #App Features- 
 
@@ -28,3 +47,5 @@ Demo -
 Hyperlink Demo -
 
 ![alt tag](simpleTwitterHyperlink.gif)
+
+
